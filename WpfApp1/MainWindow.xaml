@@ -10,40 +10,45 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
+            <!--メニュー-->
             <RowDefinition Height="auto" />
+            <!--メインコンテンツ-->
             <RowDefinition Height="1*" />
+            <!--ステータスバー-->
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
+        <!--メニュー-->
         <Menu Grid.Row="0">
             <MenuItem Header="File">
                 <MenuItem Header="Exit" Click="Exit" />
             </MenuItem>
         </Menu>
 
-        <DockPanel Grid.Row="1">
-            <TextBox DockPanel.Dock="Left" Width="400"
+        <!--メインコンテンツ-->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <!--MainTextを読み書きするバインディング-->
+            <TextBox Grid.Column="0"
                      IsUndoEnabled="True" AcceptsReturn="True"
-                     Text="{Binding MainText.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-            <TextBox DockPanel.Dock="Left"
+                     Text="{Binding MainText.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <!--読み込み専用のバインディング-->
+            <TextBox Grid.Column="1"
                      IsUndoEnabled="True" AcceptsReturn="True"
                      IsReadOnly="True"
                      Text="{Binding LowerText.Value,Mode=OneWay}" />
-            <!--
-                     Text="{Binding LowerText.Value,Mode=OneWay}" />
-                -->
-            <!--
-                     Text="{Binding MainText.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-            -->
-        </DockPanel>
+        </Grid>
+
+        <!--ステータスバー-->
         <StatusBar Grid.Row="2">
             <TextBlock Text="文字数:" />
             <TextBox IsReadOnly="True" Text="{Binding TextCount.Value,Mode=OneWay}" />
             <Separator />
             <TextBlock Text="現在時刻" />
             <TextBlock Text="{Binding Now.Value,Mode=OneWay}" />
-            <Separator />
-            <TextBlock Text="debug" />
         </StatusBar>
     </Grid>
 </Window>

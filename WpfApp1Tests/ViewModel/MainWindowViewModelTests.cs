@@ -52,5 +52,14 @@ namespace WpfApp1.ViewModel.Tests
             d = target.Now.Value - DateTime.Now;
             Assert.IsTrue(d < TimeSpan.FromSeconds(1));
         }
+
+        [TestMethod]
+        public void MainWindowViewModel_正常系_Dispose出来る()
+        {
+            using(var target = new MainWindowViewModel())
+            {
+                target.MainText.Value = "test";
+            }
+        }
     }
 }

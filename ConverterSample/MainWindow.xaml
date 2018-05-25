@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ConverterSample"
+        xmlns:vm="clr-namespace:ConverterSample.ViewModel"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel, IsDesignTimeCreatable=True}"
+        d:DataContext="{d:DesignInstance Type=vm:MainWindowViewModel, IsDesignTimeCreatable=True}"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -23,7 +24,8 @@
             <ListView Grid.Column="2" ItemsSource="{Binding RawDoubleListList ,Mode=OneWay, Converter={StaticResource DLLToSLConverter}}" />
         </Grid>
         <StackPanel Grid.Row="1">
-            <Button Content="Test" Command="{Binding TestCommand}" />
+            <Button Content="Generate" Command="{Binding TestCommand}" />
+            <Button Content="Delete" Command="{Binding DeleteCommand}" />
             <Button Content="Tyottokaeru " Command="{Binding TyottokaeruCommand}" />
         </StackPanel>
     </Grid>

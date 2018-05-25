@@ -1,38 +1,64 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
+using Reactive.Bindings.Extensions;
 using System.Linq;
 using System.Reactive.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Reactive.Bindings;
+using System.Reactive.Disposables;
 
 namespace WpfApp1.ViewModel
 {
-    public class MainWindowViewModel : INotifyPropertyChanged
+    /// <summary>
+    /// メインウィンドウ用のViewModel
+    /// </summary>
+    public class MainWindowViewModel : INotifyPropertyChanged, IDisposable
     {
+        /// <summary>
+        /// DataContextに割り付ける型は必ずINotifyPropertyChangedを継承していないと
+        /// WPFの環境ではメモリリークが発生する!!
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private CompositeDisposable Disposable { get; } = new CompositeDisposable();
+
+        /// <summary>
+        /// メインコンテンツ
+        /// </summary>
         public IReactiveProperty<string> MainText { get; } = new ReactivePropertySlim<string>("ここに文字を入力");
 
+        /// <summary>
+        /// 小文字に変換した文字列
+        /// </summary>
         public IReadOnlyReactiveProperty<string> LowerText { get; }
+
+        /// <summary>
+        /// 文字数
+        /// </summary>
         public IReadOnlyReactiveProperty<int> TextCount { get; }
 
+        /// <summary>
+        /// 現在時刻
+        /// </summary>
         public IReadOnlyReactiveProperty<DateTime> Now { get; }
 
         public MainWindowViewModel()
         {
+            MainText.AddTo(Disposable);
+
             LowerText = MainText
                 .Select(x => ConvertLower(x))
-                .ToReadOnlyReactivePropertySlim();
+                .ToReadOnlyReactivePropertySlim()
+                .AddTo(Disposable);
 
             TextCount = MainText
                 .Select(s => s.Length)
-                .ToReadOnlyReactivePropertySlim();
+                .ToReadOnlyReactivePropertySlim()
+                .AddTo(Disposable);
 
             Now = Observable.Interval(TimeSpan.FromSeconds(1))
                 .Select(_ => DateTime.Now)
-                .ToReadOnlyReactivePropertySlim(DateTime.Now);
+                .ToReadOnlyReactivePropertySlim(DateTime.Now)
+                .AddTo(Disposable);
         }
 
         public static string ConvertLower(string baseString)
@@ -45,6 +71,11 @@ namespace WpfApp1.ViewModel
             {
                 return baseString.ToLower();
             }
+        }
+
+        public void Dispose()
+        {
+            Disposable.Dispose();
         }
     }
 }
