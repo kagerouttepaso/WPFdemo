@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.IO;
 
 namespace WpfApp1.ViewModel.Tests
 {
@@ -13,10 +14,10 @@ namespace WpfApp1.ViewModel.Tests
     public class MainWindowViewModelTests
     {
         [TestMethod()]
-        public void MainWindowViewModelTest_正常系_文字数連動()
+        public void MainWindowViewModel_正常系_文字数連動()
         {
             var target = new MainWindowViewModel();
-            for (int i = 0; i < 100; i++)
+            for(int i = 0; i < 10; i++)
             {
                 var s = new string('a', i);
                 target.MainText.Value = s;
@@ -24,13 +25,30 @@ namespace WpfApp1.ViewModel.Tests
             }
         }
 
-        [TestMethod()]
-        public void MainWindowViewModelTest_正常系_現在時刻()
+        [TestMethod]
+        public void MainWindowViewModel_正常系_30字以上で小文字に変換されること()
         {
             var target = new MainWindowViewModel();
+
+            for(int i = 0; i < 50; i++)
+            {
+                var s = new string('A', i);
+                var except = s.Length > 30 ? s.ToLower() : s;
+                target.MainText.Value = s;
+                Assert.AreEqual(except, target.LowerText.Value);
+            }
+        }
+
+        [TestMethod()]
+        public void MainWindowViewModel_正常系_現在時刻()
+        {
+            var target = new MainWindowViewModel();
+
             var d = target.Now.Value - DateTime.Now;
             Assert.IsTrue(d < TimeSpan.FromSeconds(1));
+
             Thread.Sleep(TimeSpan.FromSeconds(3));
+
             d = target.Now.Value - DateTime.Now;
             Assert.IsTrue(d < TimeSpan.FromSeconds(1));
         }

@@ -20,13 +20,21 @@
                 <MenuItem Header="Exit" Click="Exit" />
             </MenuItem>
         </Menu>
+
         <DockPanel Grid.Row="1">
             <TextBox DockPanel.Dock="Left" Width="400"
                      IsUndoEnabled="True" AcceptsReturn="True"
                      Text="{Binding MainText.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
             <TextBox DockPanel.Dock="Left"
                      IsUndoEnabled="True" AcceptsReturn="True"
+                     IsReadOnly="True"
+                     Text="{Binding LowerText.Value,Mode=OneWay}" />
+            <!--
+                     Text="{Binding LowerText.Value,Mode=OneWay}" />
+                -->
+            <!--
                      Text="{Binding MainText.Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            -->
         </DockPanel>
         <StatusBar Grid.Row="2">
             <TextBlock Text="文字数:" />
