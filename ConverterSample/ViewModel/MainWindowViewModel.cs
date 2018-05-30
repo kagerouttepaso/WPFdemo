@@ -68,19 +68,22 @@ namespace ConverterSample.ViewModel
         public MainWindowViewModel()
         {
             // RawDoubleListListのPropertyChangedで発火するObserbableを作成
-            var rawDoubleListChanged = Observable
+            var rawDoubleListListObservable = Observable
                 .FromEvent<PropertyChangedEventHandler, PropertyChangedEventArgs>(
                     conversion: h => (s, e) => h(e),  // EventArgsを引数に実行する
                     addHandler: h => PropertyChanged += h, // ハンドルへの追加方法
                     removeHandler: h => PropertyChanged -= h) // ハンドルから削除する方法
                 .Where(x => x.PropertyName == nameof(RawDoubleListList)) // RawDoubleListListの変更時
+                .Select(_ => RawDoubleListList)
                 .Publish()
                 .RefCount();
 
             // プロットデータ作成
-            PlotSeries = rawDoubleListChanged
-                .Select(_ => RawDoubleListList)
-                .Select(l => l.FirstOrDefault()?.Select((x, i) => new DataPoint(i, x)).ToList() ?? new List<DataPoint>())
+            PlotSeries = rawDoubleListListObservable
+                .Select(l => l.FirstOrDefault()
+                    ?.Select((x, i) => new DataPoint(i, x))
+                    .ToList()
+                    ?? new List<DataPoint>())
                 .ToReadOnlyReactivePropertySlim();
 
             TestCommand.Subscribe(_ =>
@@ -109,9 +112,9 @@ namespace ConverterSample.ViewModel
                 RawDoubleListList = new List<List<double>>();
             });
 
-            TyottokaeruCommand = rawDoubleListChanged
+            TyottokaeruCommand = rawDoubleListListObservable
                 // イベントからObserbableを作成する
-                .Select(x => RawDoubleListList.Count >= 1) // 要素数が1以上の時有効になるコマンドを作成
+                .Select(x => x.Count >= 1) // 要素数が1以上の時有効になるコマンドを作成
                 .ToReactiveCommand(initialValue: false);
 
             TyottokaeruCommand
