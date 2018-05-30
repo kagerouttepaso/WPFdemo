@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ConverterSample"
         xmlns:vm="clr-namespace:ConverterSample.ViewModel"
+        xmlns:oxy="http://oxyplot.org/wpf"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=vm:MainWindowViewModel, IsDesignTimeCreatable=True}"
         Title="MainWindow" Height="450" Width="800">
@@ -18,10 +19,20 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
                 <ColumnDefinition />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <ListView Grid.Column="0" ItemsSource="{Binding StringList.Value, Mode=OneWay}" />
             <ListView Grid.Column="1" ItemsSource="{Binding DoubleListList.Value, Mode=OneWay, Converter={StaticResource DLLToSLConverter}}" />
             <ListView Grid.Column="2" ItemsSource="{Binding RawDoubleListList ,Mode=OneWay, Converter={StaticResource DLLToSLConverter}}" />
+            <oxy:Plot Grid.Column="3">
+                <oxy:Plot.Axes>
+                    <oxy:LinearAxis Position="Bottom" TickStyle="Inside" MajorGridlineStyle="Solid" PositionAtZeroCrossing="False" MinimumPadding="0.01" MaximumPadding="0.01" />
+                    <oxy:LinearAxis Position="Left" TickStyle="Inside" MajorGridlineStyle="Solid" PositionAtZeroCrossing="False" MinimumPadding="0.01" MaximumPadding="0.01" />
+                </oxy:Plot.Axes>
+                <oxy:Plot.Series>
+                    <oxy:LineSeries Title="Test" ItemsSource="{Binding PlotSeries.Value ,Mode=OneWay}" BrokenLineThickness="2" Color="Black" MarkerFill="Black" MarkerType="Square" />
+                </oxy:Plot.Series>
+            </oxy:Plot>
         </Grid>
         <StackPanel Grid.Row="1">
             <Button Content="Generate" Command="{Binding TestCommand}" />
