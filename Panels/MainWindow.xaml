@@ -54,7 +54,7 @@
             </TabItem>
             <TabItem Header="Stack">
                 <!--パネルの上から順に高さが最小になるように並べるだけ。簡単だけど融通がきかない
-                DockPanel LastChildFill="False"にしてDockPanel.Dock="Top"してるのと同じ
+                     DockPanel LastChildFill="False"にしてDockPanel.Dock="Top"してるのと同じ
                 -->
                 <StackPanel>
                     <Button Content="Button 1" />
@@ -65,7 +65,7 @@
             </TabItem>
             <TabItem Header="Stack Holozontal">
                 <!--StackPanelの横バージョン
-                DockPanel LastChildFill="False"にしてDockPanel.Dock="Top"してるのと同じ
+                     DockPanel LastChildFill="False"にしてDockPanel.Dock="Top"してるのと同じ
                 -->
                 <StackPanel  Orientation="Horizontal">
                     <Button Content="Button 1" />
@@ -148,9 +148,9 @@
                                     <StackPanel DockPanel.Dock="Right"
                                                 Orientation="Horizontal">
                                         <Button Style="{StaticResource ButtonStyle}"
-                                                        Content="ButtonA" />
+                                                Content="ButtonA" />
                                         <Button Style="{StaticResource ButtonStyle}"
-                                                        Content="ButtonB" />
+                                                Content="ButtonB" />
                                     </StackPanel>
                                 </DockPanel>
                                 <!--2階建ても容易-->
@@ -161,9 +161,9 @@
                                     <StackPanel DockPanel.Dock="Right"
                                                 Orientation="Horizontal">
                                         <Button Style="{StaticResource ButtonStyle}"
-                                                        Content="ButtonC" />
+                                                Content="ButtonC" />
                                         <Button Style="{StaticResource ButtonStyle}"
-                                                        Content="ButtonD" />
+                                                Content="ButtonD" />
                                     </StackPanel>
                                 </DockPanel>
                             </DockPanel>
