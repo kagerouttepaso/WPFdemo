@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using Panels.DiContainer;
-using Panels.ViewModel;
 using Panels.View;
-
+using Panels.ViewModel;
 using SimpleInjector;
 
 namespace Panels
@@ -21,6 +17,7 @@ namespace Panels
 
         private static Container BootStrap()
         {
+            // コンテナ作成
             var c = new Container();
             c.Options.ConstructorResolutionBehavior = new GreediestConstructorBehavior();
             c.Register<MainWindow>();

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
-using Reactive.Bindings.Extensions;
 using System.Linq;
+using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using Reactive.Bindings;
-using System.Reactive.Disposables;
+using Reactive.Bindings.Extensions;
 
 namespace WpfApp1.ViewModel
 {
