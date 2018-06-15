@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1Tests", "WpfApp1Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConverterSample", "ConverterSample\ConverterSample.csproj", "{CEBE8374-6C61-4D4B-ACE8-49E3B524D746}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panels", "Panels\Panels.csproj", "{210ADB9E-CFCA-429A-B1E1-9AB878BD5DE1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{CEBE8374-6C61-4D4B-ACE8-49E3B524D746}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEBE8374-6C61-4D4B-ACE8-49E3B524D746}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEBE8374-6C61-4D4B-ACE8-49E3B524D746}.Release|Any CPU.Build.0 = Release|Any CPU
+		{210ADB9E-CFCA-429A-B1E1-9AB878BD5DE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{210ADB9E-CFCA-429A-B1E1-9AB878BD5DE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{210ADB9E-CFCA-429A-B1E1-9AB878BD5DE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{210ADB9E-CFCA-429A-B1E1-9AB878BD5DE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
