@@ -1,10 +1,12 @@
-﻿<Window x:Class="Panels.MainWindow"
+﻿<Window x:Class="Panels.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Panels"
+        xmlns:local="clr-namespace:Panels.View"
+        xmlns:vm="clr-namespace:Panels.ViewModel"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=vm:MainWindowViewModel,IsDesignTimeCreatable=True}"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <TabControl>
@@ -140,6 +142,12 @@
                                     <TextBox Style="{StaticResource ValueTextBoxStyle}"
                                              Text="値" />
                                 </StackPanel>
+                                <StackPanel DockPanel.Dock="Top"
+                                            Orientation="Horizontal">
+                                    <TextBlock Style="{StaticResource KeyTextBlockStyle}"
+                                               Text="2階建てのボタン表示" />
+                                    <CheckBox IsChecked="{Binding IsChecked.Value,UpdateSourceTrigger=PropertyChanged}" />
+                                </StackPanel>
 
                                 <!--下にDockPanel-->
                                 <DockPanel DockPanel.Dock="Bottom"
@@ -156,7 +164,7 @@
                                 <!--2階建ても容易-->
                                 <DockPanel DockPanel.Dock="Bottom"
                                            LastChildFill="False"
-                                           Visibility="Hidden">
+                                           Visibility="{Binding Visibility.Value}">
                                     <!--右詰めでStackパネル = 右下に要素が横並びになる-->
                                     <StackPanel DockPanel.Dock="Right"
                                                 Orientation="Horizontal">

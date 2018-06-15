@@ -12,8 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Panels.ViewModel;
 
-namespace Panels
+namespace Panels.View
 {
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック
@@ -23,6 +24,12 @@ namespace Panels
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        public MainWindow(MainWindowViewModel viewmodel)
+            : this()
+        {
+            DataContext = viewmodel;
         }
     }
 }
